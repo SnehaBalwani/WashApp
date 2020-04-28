@@ -1,0 +1,31 @@
+<!doctype html>
+
+
+<html>
+<head>
+    <title>
+        {% if user.is_authenticated and user.is_laundry_shop %}
+        Laundry Shop Homepage
+        {% else %}
+        Customer Homepage
+        {% endif %}
+    </title>
+</head>
+<body>
+{% if user.is_authenticated and user.is_laundry_shop %}
+    <h1>Laundry Shop Homepage</h1><br>
+    <h2>Hello {{ user.username }}</h2>
+    <ul>
+        <li><a href="#">View Orders</a></li>
+        <li><a href="{{ user.image.url }}">View Profile Image</a></li>
+        <li><a href="{% url 'profile_update' %}">Update Profile</a></li>
+        <li><a href="{% url 'garment_create' %}">Update Price Scheme</a> </li>
+    </ul>
+{% else %}
+    <h1>
+        Hello {{ user.username }}
+    </h1><br>
+    <a href="{% url 'index' %}">View Nearby Laundry Shops</a>
+{% endif %}
+</body>
+</html>
